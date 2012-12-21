@@ -3,11 +3,11 @@ package edu.buaa.parking.bean;
 import java.util.Random;
 
 public class ParkingSpace {
-	private int pos;
-	private String posDesc;
 	private Car car;
 	private Object context;
 	private int mark;
+	private int pos;
+	private String posDesc;
 
 	public ParkingSpace(int pos, String desc) {
 		this.pos = pos;

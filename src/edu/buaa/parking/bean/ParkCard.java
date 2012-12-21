@@ -2,10 +2,10 @@ package edu.buaa.parking.bean;
 
 public class ParkCard {
 
+	private int mark;
 	private int parkingBoyId;
 	private int parkingPlaceId;
 	private int position;
-	private int mark;
 
 	public ParkCard(int parkingPlaceId, int position, int mark) {
 		this.position = position;

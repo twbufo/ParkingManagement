@@ -5,7 +5,7 @@ import edu.buaa.parking.strategy.IParkingStrategy;
 
 public class ParkingBoy extends BaseParkingBoy {
 
-	IParkingStrategy<ParkingPlace> strategy;
+	private IParkingStrategy<ParkingPlace> strategy;
 
 	public ParkingBoy(int id, String name,
 			IParkingStrategy<ParkingPlace> parkStrategy) {

@@ -51,6 +51,7 @@ public class ParkingManager extends ParkingBoy {
 		return null;
 	}
 
+	@Override
 	public void printStatus() {
 
 		System.out.println(String.format("Õ£≥µæ≠¿Ì:%s", this.getName()));

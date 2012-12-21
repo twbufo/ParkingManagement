@@ -8,10 +8,10 @@ import edu.buaa.parking.bean.ParkingPlace;
 
 public abstract class BaseParkingBoy {
 	private int id;
-	private String name;
-	private HashMap<Integer, ParkingPlace> parkingPlaces = new HashMap<Integer, ParkingPlace>();
-
 	private ParkingManager manager = null;
+	private String name;
+
+	private HashMap<Integer, ParkingPlace> parkingPlaces = new HashMap<Integer, ParkingPlace>();
 
 	public BaseParkingBoy(int id, String name) {
 		this.id = id;

@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class ParkingDirector {
 
-	HashMap<Integer, ParkingManager> parkingManagers = new HashMap<Integer, ParkingManager>();
+	private HashMap<Integer, ParkingManager> parkingManagers = new HashMap<Integer, ParkingManager>();
 
 	public ParkingDirector() {
 

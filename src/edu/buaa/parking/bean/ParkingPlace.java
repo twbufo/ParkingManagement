@@ -8,10 +8,10 @@ import edu.buaa.parking.strategy.IParkPlaceCollection;
 //Õ£≥µ≥°¿‡
 public class ParkingPlace implements IParkPlaceCollection {
 
-	private int maxPlace;
-	private int id;
 	private ArrayList<ParkingSpace> allPlaces = new ArrayList<ParkingSpace>();
 	private LinkedList<ParkingSpace> freePlaces = new LinkedList<ParkingSpace>();
+	private int id;
+	private int maxPlace;
 
 	public ParkingPlace(int num, int maxPlace) {
 		this.id = num;
