@@ -9,7 +9,7 @@ import edu.buaa.parking.bean.Car;
 import edu.buaa.parking.bean.Park;
 import edu.buaa.parking.bean.ParkCard;
 
-public class ParkingManager {
+public class ParkingBoy {
 
 	// 停车场列表
 	private List<Park> parkList = new ArrayList<Park>();
@@ -17,7 +17,7 @@ public class ParkingManager {
 	// 停车卡（纸）列表
 	private Map<String, ParkCard> parkCardMap = new HashMap<String, ParkCard>();
 
-	public ParkingManager() {
+	public ParkingBoy() {
 
 		this.initial();
 	}
