@@ -1,95 +1,85 @@
-package edu.buaa.park;
+package edu.buaa.parking.bean;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
 
-//停车场类
-public class ParkingPlace {
+import edu.buaa.parking.strategy.IParkPlaceCollection;
 
-	private int _max_place;
-	private int _NO;
-	private ArrayList<Place> _all_places = new ArrayList<Place>();
-	private LinkedList<Place> _free_place = new LinkedList<Place>();
-	
-	public ParkArea(int NO, int max_place)
-	{
-		if(max_place <= 0)
-			throw new ParkException(0,"停车位个数错误");
-		
-		_NO = NO;
-		init(max_place);
+//停车场类
+public class ParkingPlace implements IParkPlaceCollection {
+
+	private int maxPlace;
+	private int id;
+	private ArrayList<ParkingSpace> allPlaces = new ArrayList<ParkingSpace>();
+	private LinkedList<ParkingSpace> freePlaces = new LinkedList<ParkingSpace>();
+
+	public ParkingPlace(int num, int maxPlace) {
+		this.id = num;
+		init(maxPlace);
 	}
-	
-	private void init(int max_place)
-	{
-		_max_place = max_place;
-		for(int i=0;i<max_place;i++)
-		{
-			Place p = new Place(i,String.format("一层第%d个车位",i));
-			_all_places.add(p);
-			_free_place.add(p);
-		}
-	}
-	
+
 	/*
 	 * 空闲车位数
 	 */
-	public int getFreeCount()
-	{
-		return _free_place.size();
+	public int getFreeCount() {
+		return this.freePlaces.size();
 	}
-	
+
+	public int getId() {
+		return this.id;
+	}
+
 	/*
 	 * 占用车位数
 	 */
-	public int getMaxCount()
-	{
-		return _max_place;
+	public int getMaxCount() {
+		return this.maxPlace;
 	}
-	
+
+	private void init(int maxPlace) {
+		this.maxPlace = maxPlace;
+		for (int i = 0; i < maxPlace; i++) {
+			ParkingSpace p = new ParkingSpace(i, "一层第" + i + "个车位");
+			this.allPlaces.add(p);
+			this.freePlaces.add(p);
+		}
+	}
+
 	/*
 	 * 停车拿票
 	 */
-	public Ticket parkCar(Car car, Object context)
-	{
-		if(_free_place.isEmpty())
+	public ParkCard parkCar(Car car, Object context) {
+		if (freePlaces.isEmpty())
 			return null;
-		
-		Place p = _free_place.removeFirst();
-		int cookie = p.parkCar(car,context);
-		
-		Ticket res = new Ticket(_NO,p.get_pos(),cookie);
+
+		ParkingSpace p = freePlaces.removeFirst();
+		int cookie = p.parkCar(car, context);
+
+		ParkCard res = new ParkCard(this.id, p.getPos(), cookie);
 		return res;
 	}
-	
-	public int getNO() {
-		return _NO;
+
+	public void printStatus() {
+		System.out.println(String.format("停车场编号:%d", this.id));
+		System.out.println(String.format("车位数:%d", maxPlace));
+		System.out.println(String.format("空位数:%d", freePlaces.size()));
 	}
 
 	/*
 	 * 根据票据取车
 	 */
-	public Car removeCar(Ticket ticket)
-	{
-		int pos = ticket.getPosition();
-		Place p = _all_places.get(pos);
-		
-		if(p.is_free())
+	public Car removeCar(ParkCard parkCard) {
+		int pos = parkCard.getPosition();
+		ParkingSpace p = allPlaces.get(pos);
+
+		if (p.isfree())
 			return null;
-		
-		Car c = p.removeCar(ticket.getCookie());
-		if(c != null)	
-			_free_place.addFirst(p);
+
+		Car c = p.removeCar(parkCard.getMark());
+		if (c != null)
+			freePlaces.addFirst(p);
 
 		return c;
 	}
-	
-	public void printStatus()
-	{
-		System.out.println(String.format("停车场编号:%d",_NO));
-		System.out.println(String.format("车位数:%d",_max_place));
-		System.out.println(String.format("空位数:%d",_free_place.size()));
-	}
-	
+
 }

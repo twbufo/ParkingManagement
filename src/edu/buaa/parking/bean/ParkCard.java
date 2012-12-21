@@ -1,53 +1,36 @@
 package edu.buaa.parking.bean;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
 public class ParkCard {
 
-	private String cardId;
-	private Park park;
-	private Car car;
+	private int parkingBoyId;
+	private int parkingPlaceId;
+	private int position;
+	private int mark;
 
-	public ParkCard() {
-		super();
-		this.cardId = generateCardId(park, car);
+	public ParkCard(int parkingPlaceId, int position, int mark) {
+		this.position = position;
+		this.parkingPlaceId = parkingPlaceId;
+		this.parkingBoyId = 0;
+		this.mark = mark;
 	}
 
-	public ParkCard(Park park, Car car) {
-		super();
-		this.cardId = generateCardId(park, car);
-		this.park = park;
-		this.car = car;
+	public int getMark() {
+		return mark;
 	}
 
-	public String getCardId() {
-		return cardId;
+	public int getParkingBoyId() {
+		return this.parkingBoyId;
 	}
 
-	public Park getPark() {
-		return park;
+	public int getParkingPlaceId() {
+		return this.parkingPlaceId;
 	}
 
-	public void setPark(Park park) {
-		this.park = park;
+	public int getPosition() {
+		return this.position;
 	}
 
-	public Car getCar() {
-		return car;
+	public void setParkingBoyId(int parkingBoyId) {
+		this.parkingBoyId = parkingBoyId;
 	}
-
-	public void setCar(Car car) {
-		this.car = car;
-	}
-	
-	private String generateCardId(Park park, Car car) {
-		String cardId = "";
-		
-		long time = Calendar.getInstance().getTimeInMillis();
-		cardId = time + park.getParkName() + car.getNumber();
-		
-		return cardId;		
-	}
-
 }
